@@ -21,6 +21,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
+      - name: List Project Files
+        run: |
+            pwd
+            ls -R
       - run: echo "⚙️ JDK 17 has been set up."
       - name: Build with Maven
         run: mvn clean install
