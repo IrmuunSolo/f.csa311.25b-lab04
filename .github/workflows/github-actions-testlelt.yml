@@ -13,8 +13,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - name: List file
-      - run: ls -R
       - name: Change Directory to Project Root
         run: cd f.csa311.25b-lab04/Java
       - name: Set up JDK 17
