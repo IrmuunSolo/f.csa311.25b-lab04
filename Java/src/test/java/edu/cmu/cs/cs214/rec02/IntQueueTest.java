@@ -38,8 +38,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-    //    mQueue = new ArrayIntQueue();
+    //      mQueue = new LinkedIntQueue();
+          mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -52,20 +52,19 @@ public class IntQueueTest {
 
     @Test
     public void testNotEmpty() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(1);
+        assertFalse(mQueue.isEmpty());
     }
 
     @Test
     public void testPeekEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        assertNull(mQueue.peek());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(1);
+        assertEquals(Integer.valueOf(1), mQueue.peek());
     }
 
     @Test
@@ -80,8 +79,77 @@ public class IntQueueTest {
 
     @Test
     public void testDequeue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        for (int num : testList) {
+            mQueue.enqueue(num);
+        }
+        
+        for (int num : testList) {
+            assertEquals(Integer.valueOf(num), mQueue.dequeue());
+        }
+        assertTrue(mQueue.isEmpty());
+    }
+
+    @Test
+    public void testDequeueEmptyQueue() {
+        assertNull(mQueue.dequeue());
+    }
+
+    @Test
+    public void testEnqueueDequeueMultiple() {
+        mQueue.enqueue(1);
+        mQueue.enqueue(2);
+        assertEquals(Integer.valueOf(1), mQueue.dequeue());
+        mQueue.enqueue(3);
+        assertEquals(Integer.valueOf(2), mQueue.dequeue());
+        assertEquals(Integer.valueOf(3), mQueue.dequeue());
+        assertTrue(mQueue.isEmpty());
+    }
+
+    @Test
+    public void testArrayIntQueueBug() {
+        // ArrayIntQueue болгон сольж бүтцийн тест хийх
+        mQueue = new ArrayIntQueue();
+        mQueue.enqueue(10);
+        mQueue.enqueue(20);
+        mQueue.enqueue(30);
+        
+        assertEquals(Integer.valueOf(10), mQueue.dequeue());
+        assertEquals(Integer.valueOf(20), mQueue.peek());
+        assertEquals(Integer.valueOf(20), mQueue.dequeue());
+        assertEquals(Integer.valueOf(30), mQueue.dequeue());
+        assertNull(mQueue.dequeue()); // хоосон үед null буцаана
+    }
+
+    @Test
+    public void testEnsureCapacity() {
+        mQueue = new ArrayIntQueue();
+        // Дарааллыг анхны багтаамжаар нь дүүргэх
+        for (int i = 0; i < 10; i++) {
+            mQueue.enqueue(i);
+        }
+        
+        // ensureCapacity ажиллуулахын тулд илүү элемент нэмэх
+        mQueue.enqueue(10);
+        
+        // дараалал нь тэлж бүх элементийг агуулж байгааг бататгах
+        assertEquals(11, mQueue.size());
+        for (int i = 0; i <= 10; i++) {
+            assertEquals(Integer.valueOf(i), mQueue.dequeue());
+        }
+    }
+
+    @Test
+    public void testClear() {
+        mQueue = new ArrayIntQueue(); // зөвхөн ArrayIntQueue классд ажилхаар тохируулсан байна
+        mQueue.enqueue(1);
+        mQueue.enqueue(2);
+        mQueue.enqueue(3);
+        assertFalse(mQueue.isEmpty());
+        
+        mQueue.clear();
+        assertTrue(mQueue.isEmpty());
+        assertEquals(0, mQueue.size());
+        assertNull(mQueue.peek());
     }
 
     @Test
