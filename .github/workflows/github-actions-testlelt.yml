@@ -19,14 +19,14 @@ jobs:
       - name: Change Directory to Project Root
         run: cd Java
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
           cache: 'maven'
 
-      - run: echo "⚙️ JDK 17 has been set up."
+      - run: echo "⚙️ JDK 21 has been set up."
 
       - name: List Project Files
         run: |
