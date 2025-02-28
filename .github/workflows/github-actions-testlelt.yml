@@ -26,13 +26,10 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: List Project Files
-        run: |
-            pwd
-            ls -R
-
       - run: echo "⚙️ JDK 17 has been set up."
 
+      - name: Change Directory to Project Root
+        run: cd Java # Navigate into the 'Java' directory, which contains the 'pom.xml' file
       - name: Build with Maven
         run: mvn clean install
 
