@@ -52,6 +52,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports/TEST-edu.cmu.cs.cs214.rec02.IntQueueTest.xml
+          path: target/surefire-reports/edu.cmu.cs.cs214.rec02.IntQueueTest.txt
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
